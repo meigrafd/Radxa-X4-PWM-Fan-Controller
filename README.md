@@ -203,7 +203,6 @@ User=root
 WorkingDirectory=/root
 
 [Install]
-# Sorgt dafür, dass der Dienst beim normalen Booten geladen wird
 WantedBy=multi-user.target
 EOF
 
