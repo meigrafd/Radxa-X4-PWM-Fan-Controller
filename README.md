@@ -141,7 +141,7 @@ mpremote connect /dev/ttyACM0 repl
 ```
 
 ## Host Script (Linux x86 Python 3)
-**host.py**
+**host_fan_script.py**
 ```python
 import serial
 import time
@@ -186,4 +186,31 @@ def main():
 # Execute the main function when the script is run directly.
 if __name__ == '__main__':
     main()
+```
+
+### systemd
+```bash
+sudo cat >/etc/systemd/system/fan-control.service <<'EOF'
+[Unit]
+Description=Radxa X4 Fan Control Host Bridge
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 /root/host_fan_script.py
+Restart=always
+RestartSec=5
+User=root
+WorkingDirectory=/root
+
+[Install]
+# Sorgt dafür, dass der Dienst beim normalen Booten geladen wird
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable fan-control.service
+sudo systemctl start fan-control.service
+
+sudo systemctl status fan-control.service
+journalctl -u fan-control.service -f
 ```
