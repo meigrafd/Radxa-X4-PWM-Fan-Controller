@@ -11,7 +11,7 @@
 
 ### Required components
 - Radxa X4 SBC
-- 5V PWM Fan (connected to GPIO 20 for the PWM signal)
+- 5V PWM Fan (connected to GPIO 20 for the PWM, GPIO 21 for the Tacho signal. GPIO20 (pin#8) = PWM2A, GPIO21 (pin#10) = PWM2B)
 - [MicroPython firmware flashed onto the embedded RP2040](https://www.youtube.com/watch?v=rUkpIG_3D9k)
 - Python 3 installed on the Host OS
 
