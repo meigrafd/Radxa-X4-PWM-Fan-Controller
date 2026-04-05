@@ -11,7 +11,7 @@
 
 ### Required components
 - Radxa X4 SBC
-- 5V PWM Fan (connected to GPIO 20 for the PWM, GPIO 21 for the Tacho signal. GPIO20 (pin#8) = PWM2A, GPIO21 (pin#10) = PWM2B)
+- 5V PWM Fan (connected to GPIO 20 for the PWM, GPIO 21 for the Tacho signal. GPIO20 (pin#8) = PWM2A, GPIO21 (pin#10) = PWM2B). Ive used [Arctic P8 Max 80mm](<https://www.arctic.de/P8-Max/ACFAN00286A>)
 - [MicroPython firmware flashed onto the embedded RP2040](https://www.youtube.com/watch?v=rUkpIG_3D9k) - [Radxa X4 MircoPython](https://docs.radxa.com/en/x/x4/software/micro_python)
 - Python 3 installed on the Host OS
 
@@ -29,6 +29,10 @@ sudo mount /dev/sda1 /mnt/pico
 wget -P /mnt/pico/ https://micropython.org/resources/firmware/RPI_PICO-20241129-v1.24.1.uf2
 ```
 When the usb device disappears, the program starts executing.
+
+```bash
+pip3 install mpremote
+```
 
 ## RP2040 Script - the brain (MicroPython)
 **fan_control.py**
@@ -269,12 +273,12 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+Get used ttyACM
+```bash
+ls -la /dev/ttyACM*
+```
 Transfer and activate
 ```bash
-pip3 install mpremote
-
-ls -la /dev/ttyACM*
-
 mpremote connect /dev/ttyACM0 cp fan_control.py :main.py
 mpremote connect /dev/ttyACM0 soft-reset
 ```
