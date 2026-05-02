@@ -1,7 +1,7 @@
 # Radxa X4 - PWM Fan Controller
 
 ### Key features
-- Dual-architecture setup (x86 Host + RP2040 MCU) to bypass hardware limitations.
+- Dual-architecture setup (x86 Host + RP2040 MCU) to bypass hardware limitations - MCU cant read cpu-thermal sensor, thermal_zone0 is the MCU itself.
 - Serial communication to transfer host thermal data to the microcontroller.
 - Dynamic, interpolated PWM fan speed adjustment based on live CPU thermals.
 - Array-based custom fan curve with linear interpolation for smooth acoustic transitions.
